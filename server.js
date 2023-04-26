@@ -71,22 +71,37 @@ async function getScores() {
         finalScore2: finalResult.at(-1),
       };
     });
-    return scoreResultLine;
 
-    // const table = Array.from(
-    //   document.querySelectorAll(".Table__TR.Table__TR--sm.Table__even")
-    // );
-    // const data = table.map((item) => ({
-    //   team1: item.querySelector(".Table__TD .local.flex.items-center a")
-    //     .innerText,
-    //   team2: item.querySelector(".away.flex.items-center a").innerText,
-    //   // finalScore1: scoreResultLine[item].finalScore1,
-    //   // finalScore2: scoreResultLine[item].finalScore2,
-    // }));
-    // return data;
+    const table = Array.from(
+      document.querySelectorAll(".Table__TR.Table__TR--sm.Table__even")
+    );
+    const data = table.map((item) => ({
+      team1: item.querySelector(".Table__TD .local.flex.items-center a")
+        .innerText,
+      team2: item.querySelector(".away.flex.items-center a").innerText,
+      // finalScore1: scoreResultLine[item].finalScore1,
+      // finalScore2: scoreResultLine[item].finalScore2,
+    }));
+    return { data, scoreResultLine };
   });
 
-  console.log(teams);
+  const { data, scoreResultLine } = teams;
+
+  // console.log(data[0]);
+  // console.log(scoreResultLine[0]);
+
+  // let john = { ...data[1], ...scoreResultLine[1] };
+
+  // console.log(john);
+
+  let final = [];
+
+  for (let i = 0; i < data.length; i++) {
+    let john = { ...data[i], ...scoreResultLine[i] };
+    final.push(john);
+  }
+
+  console.log(final);
 
   //       finalScore1: item
   //        .querySelectorAll(".Table__Team.score")
