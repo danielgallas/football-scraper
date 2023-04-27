@@ -7,11 +7,11 @@ async function getScores() {
 
   const page = await browser.newPage();
 
-  const url =
-    "https://www.espn.co.uk/football/team/results/_/id/382/league/ENG.1";
-
   //   const url =
-  //     "https://www.espn.co.uk/football/team/results/_/id/6273/league/BRA.1";
+  //     "https://www.espn.co.uk/football/team/results/_/id/382/league/ENG.1";
+
+  const url =
+    "https://www.espn.co.uk/football/team/results/_/id/6273/league/BRA.1";
 
   await page.goto(url, {
     waitUntil: "networkidle0",
