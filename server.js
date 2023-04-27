@@ -3,11 +3,8 @@ const app = express();
 const connectDB = require("./db/connect");
 require("dotenv").config();
 const results = require("./routes/results");
-const getScores = require("./scraper/scraper");
 
 port = process.env.PORT || 5001;
-
-// getScores();
 
 // middleware
 app.use(express.json());
