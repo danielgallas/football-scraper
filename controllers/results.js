@@ -4,7 +4,7 @@ const getScores = require("../scraper/scraper");
 const getResults = async (req, res) => {
   try {
     const fetchResults = await getScores();
-    res.status(201).json({ fetchResults });
+    await res.status(201).json({ fetchResults });
   } catch (error) {
     res.status(400).send(error);
   }
