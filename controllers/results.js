@@ -3,10 +3,12 @@ const getScores = require("../scraper/scraper");
 
 const getResults = async (req, res) => {
   try {
-    const dan = await getScores();
-    console.log(dan);
-    const fetchResults = [{ daniel: "teste", juiz: "futebol" }];
-    await res.status(201).json({ fetchResults });
+    const fetchResults = await getScores();
+    try {
+      return await res.status(201).json({ fetchResults });
+    } catch (error) {
+      res.status(401).send("New error");
+    }
   } catch (error) {
     res.status(406).send("This is what you need to figure out");
   }
