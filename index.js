@@ -10,6 +10,10 @@ port = process.env.PORT || 5001;
 app.use(express.json());
 app.use("/api/v1/results", results);
 
+app.get("/main", (req, res) => {
+  res.send("main page!");
+});
+
 // starting the server and the database
 const start = async () => {
   try {
