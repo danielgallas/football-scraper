@@ -6,7 +6,7 @@ const getResults = async (req, res) => {
     const fetchResults = await getScores();
     await res.status(201).json({ fetchResults });
   } catch (error) {
-    res.status(400).send(error);
+    res.status(406).send("This is what you need to figure out");
   }
 };
 
