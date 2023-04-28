@@ -3,7 +3,8 @@ const getScores = require("../scraper/scraper");
 
 const getResults = async (req, res) => {
   try {
-    const fetchResults = await getScores();
+    // const fetchResults = await getScores();
+    const fetchResults = [{ daniel: "teste", juiz: "futebol" }];
     await res.status(201).json({ fetchResults });
   } catch (error) {
     res.status(406).send("This is what you need to figure out");
