@@ -1,18 +1,22 @@
 // getScores is the web scraper function
 const puppeteer = require("puppeteer");
+require("dotenv").config();
 
 async function getScores() {
   const browser = await puppeteer.launch({
+    args: [
+      "--no-sandbox",
+      "--disable-setuid-sandbox",
+      "--single-process",
+      "--no-zygote",
+    ],
+    executablePath:
+      process.env.NODE_ENV === "production"
+        ? process.env.PUPPETEER_EXECUTABLE_PATH
+        : puppeteer.executablePath(),
     headless: false,
-    args: ["--no-sandbox", "--disable-setuid-sandbox"],
   });
-  // const browser = await chromium.puppeteer.launch({
-  //   args: [...chromium.args, "--hide-scrollbars", "--disable-web-security"],
-  //   defaultViewport: chromium.defaultViewport,
-  //   executablePath: await chromium.executablePath,
-  //   headless: true,
-  //   ignoreHTTPSErrors: true,
-  // });
+
   const page = await browser.newPage();
   await page.goto("https://www.google.com/");
   await browser.close();
