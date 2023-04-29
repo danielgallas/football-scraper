@@ -2,17 +2,17 @@
 const puppeteer = require("puppeteer");
 
 async function getScores() {
-  const browser = await puppeteer.launch({ headless: "new" });
-  const page = await browser.newPage();
-  const url = "https://www.google.com/";
+  // const browser = await puppeteer.launch({ headless: "new" });
+  // const page = await browser.newPage();
+  // const url = "https://www.google.com/";
 
-  await page.goto(url, {
-    waitUntil: "networkidle0",
-  });
+  // await page.goto(url, {
+  //   waitUntil: "networkidle0",
+  // });
 
   const fetchedResults = [{ daniel: "teste" }];
 
-  await browser.close();
+  // await browser.close();
   return fetchedResults;
 }
 
