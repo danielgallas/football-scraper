@@ -3,12 +3,13 @@ const puppeteer = require("puppeteer");
 
 async function getScores() {
   const browser = await puppeteer.launch({
+    headless: false,
     args: ["--no-sandbox", "--disable-setuid-sandbox"],
   });
   const page = await browser.newPage();
   const url = "https://www.google.com/";
   await page.goto(url);
-  await browser.close();
+  // await browser.close();
 
   // const page = await browser.newPage();
   // const url = "https://www.google.com/";
