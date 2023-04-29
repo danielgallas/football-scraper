@@ -3,6 +3,21 @@ const puppeteer = require("puppeteer");
 
 async function getScores() {
   const browser = await puppeteer.launch({ headless: "new" });
+  const page = await browser.newPage();
+  const url = "https://www.google.com/";
+
+  await page.goto(url, {
+    waitUntil: "networkidle0",
+  });
+
+  const fetchedResults = [{ daniel: "teste" }];
+
+  await browser.close();
+  return fetchedResults;
+}
+
+async function getScores2() {
+  const browser = await puppeteer.launch({ headless: "new" });
   // const browser = await puppeteer.launch({ headless: false });
 
   const page = await browser.newPage();
