@@ -2,10 +2,12 @@
 const puppeteer = require("puppeteer");
 require("dotenv").config();
 
-async function getScores() {
+async function getScores2() {
   const browser = await puppeteer.launch({
+    headless: false,
     args: [
       "--no-sandbox",
+      "--disable-gpu",
       "--disable-setuid-sandbox",
       "--single-process",
       "--no-zygote",
@@ -33,9 +35,21 @@ async function getScores() {
   return fetchedResults;
 }
 
-async function getScores2() {
-  const browser = await puppeteer.launch({ headless: "new" });
+async function getScores() {
+  // const browser = await puppeteer.launch({ headless: "new" });
   // const browser = await puppeteer.launch({ headless: false });
+  const browser = await puppeteer.launch({
+    args: [
+      "--no-sandbox",
+      "--disable-setuid-sandbox",
+      "--single-process",
+      "--no-zygote",
+    ],
+    executablePath:
+      process.env.NODE_ENV === "production"
+        ? process.env.PUPPETEER_EXECUTABLE_PATH
+        : puppeteer.executablePath(),
+  });
 
   const page = await browser.newPage();
 
