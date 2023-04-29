@@ -1,15 +1,22 @@
 // getScores is the web scraper function
 const puppeteer = require("puppeteer");
+const chromium = require("chrome-aws-lambda");
 
 async function getScores() {
-  const browser = await puppeteer.launch({
-    headless: false,
-    args: ["--no-sandbox", "--disable-setuid-sandbox"],
+  // const browser = await puppeteer.launch({
+  //   headless: false,
+  //   args: ["--no-sandbox", "--disable-setuid-sandbox"],
+  // });
+  const browser = await chromium.puppeteer.launch({
+    args: [...chromium.args, "--hide-scrollbars", "--disable-web-security"],
+    defaultViewport: chromium.defaultViewport,
+    executablePath: await chromium.executablePath,
+    headless: true,
+    ignoreHTTPSErrors: true,
   });
   const page = await browser.newPage();
-  const url = "https://www.google.com/";
-  await page.goto(url);
-  // await browser.close();
+  await page.goto("https://www.google.com/");
+  await browser.close();
 
   // const page = await browser.newPage();
   // const url = "https://www.google.com/";
