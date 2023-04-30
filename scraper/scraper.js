@@ -1,25 +1,37 @@
 // getScores is the web scraper function
-const puppeteer = require("puppeteer");
+// const puppeteer = require("puppeteer");
 require("dotenv").config();
+const edgeChromium = require("chrome-aws-lambda");
+const puppeteer = require("puppeteer-core");
 
-async function getScores2() {
+async function getScores() {
+  // Importing Puppeteer core as default otherwise
+  // it won't function correctly with "launch()"
+  // import edgeChromium from 'chrome-aws-lambda'
+  // import puppeteer from 'puppeteer-core'
+
+  // You may want to change this if you're developing
+  // on a platform different from macOS.
+  // See https://github.com/vercel/og-image for a more resilient
+  // system-agnostic options for Puppeteeer.
+  const LOCAL_CHROME_EXECUTABLE =
+    "/Applications/Google Chrome.app/Contents/MacOS/Google Chrome";
+
+  // Edge executable will return an empty string locally.
+  const executablePath =
+    (await edgeChromium.executablePath) || LOCAL_CHROME_EXECUTABLE;
+
   const browser = await puppeteer.launch({
+    executablePath,
+    args: edgeChromium.args,
     headless: false,
-    args: [
-      "--no-sandbox",
-      "--disable-gpu",
-      "--disable-setuid-sandbox",
-      "--single-process",
-      "--no-zygote",
-    ],
-    executablePath:
-      process.env.NODE_ENV === "production"
-        ? process.env.PUPPETEER_EXECUTABLE_PATH
-        : puppeteer.executablePath(),
   });
 
   const page = await browser.newPage();
-  await page.goto("https://www.google.com/");
+  await page.goto("https://github.com");
+
+  // const page = await browser.newPage();
+  // await page.goto("https://www.google.com/");
   await browser.close();
 
   // const page = await browser.newPage();
@@ -35,21 +47,9 @@ async function getScores2() {
   return fetchedResults;
 }
 
-async function getScores() {
-  // const browser = await puppeteer.launch({ headless: "new" });
+async function getScores2() {
+  const browser = await puppeteer.launch({ headless: "new" });
   // const browser = await puppeteer.launch({ headless: false });
-  const browser = await puppeteer.launch({
-    args: [
-      "--no-sandbox",
-      "--disable-setuid-sandbox",
-      "--single-process",
-      "--no-zygote",
-    ],
-    executablePath:
-      process.env.NODE_ENV === "production"
-        ? process.env.PUPPETEER_EXECUTABLE_PATH
-        : puppeteer.executablePath(),
-  });
 
   const page = await browser.newPage();
 
